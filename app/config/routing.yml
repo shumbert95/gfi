@@ -6,3 +6,6 @@ api:
     resource: api.yml
     prefix: /api
 
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
