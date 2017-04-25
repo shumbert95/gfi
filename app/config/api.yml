@@ -5,3 +5,7 @@ offers:
 users:
     type:     rest
     resource: AppBundle\Controller\API\UserController
+
+api:
+    resource: AppBundle\Controller\API\DefaultController
+    type: rest
