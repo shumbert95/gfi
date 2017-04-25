@@ -39,13 +39,17 @@ class DefaultController extends Controller
                                     'login' => array('url' => '/api/users/login',
                                                      'method' => 'POST',
                                                      'params' => array('email' => 'required (string)',
-                                                                       'password' => 'required (string)'))),
+                                                                       'password' => 'required (string)')),
+                                    'update skills' => array('url' => '/api/users/update_skills',
+                                                             'method' => 'POST',
+                                                             'params' => array('email' => 'required (string)',
+                                                                               'tags' => 'required (array)')),
                                 'offers' => array(
                                     'get offers' => array('url' => '/api/offers',
                                                           'method' => 'GET'),
                                     'get offer info' => array('url' => '/api/offers/{reference}',
                                                               'method' => 'POST')
-                                )));
+                                ))));
         return new JsonResponse($response);
     }
 }
