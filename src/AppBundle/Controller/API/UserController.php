@@ -70,7 +70,7 @@ class UserController extends Controller
             $user->setEnabled(true);
             $user->setFirstName($content->first_name);
             $user->setLastName($content->last_name);
-            $user->setPassword($content->password);
+            $user->setPlainPassword($content->password);
             $user->setUsername($content->email);
             $user->setEmail($content->email);
             $user->setPhone($content->phone);
