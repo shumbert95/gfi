@@ -92,12 +92,21 @@ class UserController extends Controller
 
         $content = json_decode($request->getContent());
 
+
         $userManager = $this->get('fos_user.user_manager');
-        $user = $userManager->findUserBy(array('email' => $content->email, 'password' => $content->password));
-        if ($user) {
-            $response = array('success' => 'true', 'message' => 'Connected', 'user_id' => $user->getId());
+        $factory = $this->get('security.encoder_factory');
+        $user = $userManager->findUserBy(array('email' => $content->email));
+        if (!$user) {
+            $response = array('success' => 'false', 'message' => 'No account found for this email.');
         } else {
-            $response = array('success' => 'false', 'message' => 'No account found for this combination email/password');
+            $encoder = $factory->getEncoder($user);
+            $bool = ($encoder->isPasswordValid($user->getPassword(), $content->password, $user->getSalt())) ? true : false;
+
+            if ($bool) {
+                $response = array('success' => 'true', 'message' => 'Connected', 'user_id' => $user->getId());
+            } else {
+                $response = array('success' => 'false', 'message' => 'Wrong password');
+            }
         }
 
         return new JsonResponse($response);
