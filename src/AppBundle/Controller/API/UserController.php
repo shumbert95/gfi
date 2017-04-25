@@ -29,7 +29,7 @@ class UserController extends Controller
         $user = $userManager->findUserBy(array('email' => $request->get('username')));
 
         if ($user) {
-            $response = array('Success' => 'true', 'User' => array(
+            $response = array('success' => 'true', 'user' => array(
                                                             'id' => $user->getId(),
                                                             'first_name' => $user->getFirstName(),
                                                             'last_name' => $user->getLastName(),
@@ -39,7 +39,7 @@ class UserController extends Controller
                                                             )
             );
         } else {
-            $response = array('Success' => 'false', 'Message' => 'No user found');
+            $response = array('success' => 'false', 'message' => 'No user found');
         }
 
         return new JsonResponse($response);
@@ -57,7 +57,7 @@ class UserController extends Controller
         $userManager = $this->get('fos_user.user_manager');
         $user = $userManager->findUserBy(array('email' => $content->email));
         if ($user) {
-            $response = array('Success' => 'false', 'Message' => 'This email is already used.');
+            $response = array('success' => 'false', 'message' => 'This email is already used.');
         } else {
             $user = $userManager->createUser();
             $user->setEnabled(true);
@@ -71,7 +71,7 @@ class UserController extends Controller
             $token = $tokenGenerator->generateToken();
             $user->setConfirmationToken($token);
             $userManager->updateUser($user);
-            $response = array('Success' => 'true', 'Message' => 'User created', 'user_id' => $user->getId());
+            $response = array('success' => 'true', 'message' => 'User created', 'user_id' => $user->getId());
         }
 
         return new JsonResponse($response);
@@ -88,9 +88,9 @@ class UserController extends Controller
         $userManager = $this->get('fos_user.user_manager');
         $user = $userManager->findUserBy(array('email' => $content->email, 'password' => $content->password));
         if ($user) {
-            $response = array('Success' => 'true', 'Message' => 'Connected', 'user_id' => $user->getId());
+            $response = array('success' => 'true', 'message' => 'Connected', 'user_id' => $user->getId());
         } else {
-            $response = array('Success' => 'false', 'Message' => 'No account found for this combination email/password');
+            $response = array('success' => 'false', 'message' => 'No account found for this combination email/password');
         }
 
         return new JsonResponse($response);
