@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\API;
 
+use AppBundle\Entity\Tags;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -29,13 +30,19 @@ class UserController extends Controller
         $user = $userManager->findUserBy(array('email' => $request->get('username')));
 
         if ($user) {
+            $tags = array();
+            if (count($user->getSkills())) {
+                foreach ($user->getSkills() as $skill) {
+                    $tags[] = $skill->name;
+                }
+            }
             $response = array('success' => 'true', 'user' => array(
                                                             'id' => $user->getId(),
                                                             'first_name' => $user->getFirstName(),
                                                             'last_name' => $user->getLastName(),
                                                             'email' => $user->getEmail(),
                                                             'phone' => $user->getPhone(),
-                                                            'tags' => array('html', 'css', 'javascript', 'php')
+                                                            'tags' => $tags
                                                             )
             );
         } else {
@@ -89,6 +96,47 @@ class UserController extends Controller
         $user = $userManager->findUserBy(array('email' => $content->email, 'password' => $content->password));
         if ($user) {
             $response = array('success' => 'true', 'message' => 'Connected', 'user_id' => $user->getId());
+        } else {
+            $response = array('success' => 'false', 'message' => 'No account found for this combination email/password');
+        }
+
+        return new JsonResponse($response);
+    }
+
+    /**
+     * @param Request $request
+     * @Post("/users/update_skills")
+     */
+    public function updateSkillsAction(Request $request) {
+
+        $content = json_decode($request->getContent());
+
+        $userManager = $this->get('fos_user.user_manager');
+        $user = $userManager->findUserBy(array('email' => $content->email));
+        if ($user) {
+            $tags = new ArrayCollection();
+
+            $doctrine = $this->container->get('doctrine');
+            $em = $doctrine->getManager();
+
+            foreach ($content->tags as $tag) {
+                $_tag = $this->get('doctrine.orm.entity_manager')
+                    ->getRepository('AppBundle:Tags')
+                    ->findOneByName($tag);
+                if ($_tag) {
+                    $tags->add($_tag);
+                } else {
+                    $_tag = new Tags();
+                    $_tag->setName($tag);
+                    $_tag->setCustom(true);
+                    $em->persist($_tag);
+                    $em->flush();
+                    $tags->add($_tag);
+                }
+            }
+            $user->setSkills($tags);
+            $userManager->updateUser($user);
+            $response = array('success' => 'true', 'message' => 'User updated', 'user_id' => $user->getId());
         } else {
             $response = array('success' => 'false', 'message' => 'No account found for this combination email/password');
         }
