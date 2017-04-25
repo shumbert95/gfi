@@ -26,21 +26,21 @@ class OfferController extends Controller
     {
         $offer = $this->get('doctrine.orm.entity_manager')
             ->getRepository('AppBundle:Offer')
-            ->findByReference($request->get('offer_reference'))[0];
-        $formatted = array(
-                        'id' => $offer->getId(),
-                        'reference' => $offer->getReference(),
-                        'title' => $offer->getTitle(),
-                        'description' => $offer->getDescription(),
-                        'poste' => $offer->getPoste(),
-                    );
+            ->findOneByReference($request->get('offer_reference'));
+        if ($offer) {
+            $response = array('Success' => 'true', 'Offer' => array(
+                'id' => $offer->getId(),
+                'reference' => $offer->getReference(),
+                'title' => $offer->getTitle(),
+                'description' => $offer->getDescription(),
+                'poste' => $offer->getPoste(),
+            ));
 
-        $viewHandler = $this->get('fos_rest.view_handler');
+        } else {
+            $response = array('Success' => 'false', 'Message' => 'No offer found.');
+        }
 
-        $view = View::create($formatted);
-        $view->setFormat('json');
-
-        return $viewHandler->handle($view);
+        return new JsonResponse($response);
 
     }
 
@@ -53,22 +53,22 @@ class OfferController extends Controller
             ->getRepository('AppBundle:Offer')
             ->findAll();
 
-        $formatted = [];
-        foreach ($offers as $offer) {
-            $formatted[] = [
-                'id' => $offer->getId(),
-                'reference' => $offer->getReference(),
-                'title' => $offer->getTitle(),
-                'description' => $offer->getDescription(),
-                'poste' => $offer->getPoste(),
-            ];
+        if (count($offers)) {
+            $response = array();
+            $response['success'] = 'true';
+            foreach ($offers as $k => $offer) {
+                $response['offers'][] = array(
+                    'id' => $offer->getId(),
+                    'reference' => $offer->getReference(),
+                    'title' => $offer->getTitle(),
+                    'description' => $offer->getDescription(),
+                    'poste' => $offer->getPoste(),
+                );
+            }
+        } else {
+            $response = array('success' => 'false', 'message' => 'No offer found.');
         }
 
-        $viewHandler = $this->get('fos_rest.view_handler');
-
-        $view = View::create($formatted);
-        $view->setFormat('json');
-
-        return $viewHandler->handle($view);
+        return new JsonResponse($response);
     }
 }
