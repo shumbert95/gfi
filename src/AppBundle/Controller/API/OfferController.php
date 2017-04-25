@@ -20,14 +20,13 @@ class OfferController extends Controller
     /**
      *
      * @param Request $request
-     * @Rest\Get("/offers/{offer_id}")
+     * @Rest\Get("/offers/{offer_reference}")
      */
     public function getOfferAction(Request $request)
     {
         $offer = $this->get('doctrine.orm.entity_manager')
             ->getRepository('AppBundle:Offer')
-            ->find($request->get('offer_id'));
-
+            ->findByReference($request->get('offer_reference'))[0];
         $formatted = array(
                         'id' => $offer->getId(),
                         'reference' => $offer->getReference(),
