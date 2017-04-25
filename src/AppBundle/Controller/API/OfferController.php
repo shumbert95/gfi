@@ -20,15 +20,15 @@ class OfferController extends Controller
     /**
      *
      * @param Request $request
-     * @Rest\Get("/offers/{offer_reference}")
+     * @Rest\Get("/offers/{reference}")
      */
     public function getOfferAction(Request $request)
     {
         $offer = $this->get('doctrine.orm.entity_manager')
             ->getRepository('AppBundle:Offer')
-            ->findOneByReference($request->get('offer_reference'));
+            ->findOneByReference($request->get('reference'));
         if ($offer) {
-            $response = array('Success' => 'true', 'Offer' => array(
+            $response = array('success' => 'true', 'offer' => array(
                 'id' => $offer->getId(),
                 'reference' => $offer->getReference(),
                 'title' => $offer->getTitle(),
@@ -37,7 +37,7 @@ class OfferController extends Controller
             ));
 
         } else {
-            $response = array('Success' => 'false', 'Message' => 'No offer found.');
+            $response = array('success' => 'false', 'message' => 'No offer found.');
         }
 
         return new JsonResponse($response);
