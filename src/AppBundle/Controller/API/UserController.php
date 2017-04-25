@@ -21,32 +21,28 @@ class UserController extends Controller
     /**
      *
      * @param Request $request
-     * @Rest\Get("/users/{username}")
+     * @Rest\Get("/user")
      */
     public function getUserAction(Request $request)
     {
-        $user = $this->get('doctrine.orm.entity_manager')
-            ->getRepository('AppBundle:User')
-            ->findByReference($request->get('username'));
+        $userManager = $this->get('fos_user.user_manager');
+        $user = $userManager->findUserBy(array('email' => $request->get('username')));
 
-        if (count($user)) {
-            $user = $user[0];
-            $formatted = array(
-                'id' => $user->getId(),
-                'reference' => $user->getReference(),
-                'title' => $user->getTitle(),
-                'description' => $user->getDescription(),
-                'poste' => $offer->getPoste(),
+        if ($user) {
+            $response = array('Success' => 'true', 'User' => array(
+                                                            'id' => $user->getId(),
+                                                            'first_name' => $user->getFirstName(),
+                                                            'last_name' => $user->getLastName(),
+                                                            'email' => $user->getEmail(),
+                                                            'phone' => $user->getPhone(),
+                                                            'tags' => array('html', 'css', 'javascript', 'php')
+                                                            )
             );
         } else {
-            $formatted = array('errors' => array('Message' => 'Undefined reference'));
+            $response = array('Success' => 'false', 'Message' => 'No user found');
         }
-        $viewHandler = $this->get('fos_rest.view_handler');
 
-        $view = View::create($formatted);
-        $view->setFormat('json');
-
-        return $viewHandler->handle($view);
+        return new JsonResponse($response);
 
     }
 
