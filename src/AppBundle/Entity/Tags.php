@@ -28,6 +28,13 @@ class Tags
      */
     private $name;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="custom", type="string")
+     */
+    private $custom;
+
 
     /**
      * Get id
@@ -61,6 +68,30 @@ class Tags
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set custom
+     *
+     * @param boolean $custom
+     *
+     * @return boolean
+     */
+    public function setCustom($custom)
+    {
+        $this->custom = $custom;
+
+        return $this;
+    }
+
+    /**
+     * Get custom
+     *
+     * @return boolean
+     */
+    public function getCustom()
+    {
+        return $this->custom;
     }
 }
 

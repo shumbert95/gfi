@@ -40,6 +40,15 @@ class User extends BaseUser
      */
     private $phone;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tags", cascade={"persist"})
+     * @ORM\JoinTable(name="user_skills",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id")}
+     * )
+     */
+    private $skills;
+
     public function __construct()
     {
         parent::__construct();
@@ -117,5 +126,51 @@ class User extends BaseUser
     public function getPhone()
     {
         return $this->phone;
+    }
+
+    /**
+     * Set skills
+     *
+     * @param string $skills
+     *
+     * @return User
+     */
+    public function setSkills($skills)
+    {
+        $this->skills = $skills;
+
+        return $this;
+    }
+
+    /**
+     * Get skills
+     *
+     */
+    public function getSkills()
+    {
+        return $this->skills;
+    }
+
+    /**
+     * Add skill
+     *
+     * @param \AppBundle\Entity\Tags $skill
+     * @return User
+     */
+    public function addSkill(\AppBundle\Entity\Tags $skill)
+    {
+        $this->skills[] = $skill;
+
+        return $this;
+    }
+
+    /**
+     * Remove skill
+     *
+     * @param \AppBundle\Entity\Tags $activities
+     */
+    public function removeActivity(\AppBundle\Entity\Tags $skill)
+    {
+        $this->skills->removeElement($skill);
     }
 }

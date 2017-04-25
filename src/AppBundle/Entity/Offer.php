@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -49,6 +50,30 @@ class Offer
      */
     private $description;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tags", cascade={"persist"})
+     * @ORM\JoinTable(name="offer_required_tags",
+     *      joinColumns={@ORM\JoinColumn(name="offer_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id")}
+     * )
+     */
+    private $required_skills;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tags", cascade={"persist"})
+     * @ORM\JoinTable(name="offer_optional_tags",
+     *      joinColumns={@ORM\JoinColumn(name="offer_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id")}
+     * )
+     */
+    private $optional_skills;
+
+
+    public function __construct()
+    {
+        $this->optional_skills = new ArrayCollection();
+        $this->required_skills = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -154,6 +179,54 @@ class Offer
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set required_skills
+     *
+     * @param string $required_skills
+     *
+     * @return Offer
+     */
+    public function setRequiredSkills($required_skills)
+    {
+        $this->required_skills = $required_skills;
+
+        return $this;
+    }
+
+    /**
+     * Get required_skills
+     *
+     * @return string
+     */
+    public function getRequiredSkills()
+    {
+        return $this->required_skills;
+    }
+
+    /**
+     * Set optional_skills
+     *
+     * @param string $optional_skills
+     *
+     * @return Offer
+     */
+    public function setOptionalSkills($optional_skills)
+    {
+        $this->optional_skills = $optional_skills;
+
+        return $this;
+    }
+
+    /**
+     * Get optional_skills
+     *
+     * @return string
+     */
+    public function getOptionalSkills()
+    {
+        return $this->optional_skills;
     }
 }
 
