@@ -44,6 +44,13 @@ class DefaultController extends Controller
                                                              'method' => 'POST',
                                                              'params' => array('email' => 'required (string)',
                                                                                'tags' => 'required (array)')),
+                                    'update infos' => array('url' => '/api/users/update',
+                                                            'method' => 'POST',
+                                                            'params' => array('email' => 'required (string)',
+                                                                              'first_name' => 'optional (string)',
+                                                                              'last_name' => 'optional (string)',
+                                                                              'password' => 'optional (string)',
+                                                                              'phone' => 'optional (string)')),
                                 'offers' => array(
                                     'get offers' => array('url' => '/api/offers',
                                                           'method' => 'GET'),
