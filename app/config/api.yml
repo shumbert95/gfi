@@ -10,6 +10,10 @@ tags:
     type:     rest
     resource: AppBundle\Controller\API\TagsController
 
+quiz:
+    type:     rest
+    resource: AppBundle\Controller\API\QuizController
+
 api:
     resource: AppBundle\Controller\API\DefaultController
     type: rest
