@@ -24,6 +24,13 @@ class Quiz
     /**
      * @var string
      *
+     * @ORM\Column(name="code", type="string", length=64, unique=true)
+     */
+    private $code;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
@@ -46,6 +53,30 @@ class Quiz
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set code
+     *
+     * @param string $code
+     *
+     * @return Question
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * Get code
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
     }
 
     /**
@@ -98,7 +129,7 @@ class Quiz
 
     public function __toString()
     {
-        return ''.$this->title;
+        return ''.$this->code;
     }
 }
 

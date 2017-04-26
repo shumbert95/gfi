@@ -24,6 +24,13 @@ class Question
     /**
      * @var string
      *
+     * @ORM\Column(name="code", type="string", length=64, unique=true)
+     */
+    private $code;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="title", type="text")
      */
     private $title;
@@ -86,6 +93,29 @@ class Question
     public function getId()
     {
         return $this->id;
+    }
+    /**
+     * Set code
+     *
+     * @param string $code
+     *
+     * @return Question
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * Get code
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
     }
 
     /**
@@ -282,7 +312,7 @@ class Question
 
     public function __toString()
     {
-        return ''.$this->title;
+        return ''.$this->code;
     }
 
 }
