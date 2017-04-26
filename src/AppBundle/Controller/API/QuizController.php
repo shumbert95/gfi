@@ -43,7 +43,7 @@ class QuizController extends Controller
                                          'time' => $question->getTime(),
                                         );
                 }
-                $response['Quiz'][] = array(
+                $response['quiz'][] = array(
                     'id' => $quiz->getId(),
                     'code' => $quiz->getCode(),
                     'title' => $quiz->getTitle(),
