@@ -32,6 +32,7 @@ class QuizController extends Controller
             foreach ($quizs as $quiz) {
                 foreach ($quiz->getQuestions() as $question) {
                     $questions[] = array('id' => $question->getId(),
+                                         'code' => $question->getCode(),
                                          'title' => $question->getTitle(),
                                          'answer_one' => $question->getAnswerOne(),
                                          'answer_two' => $question->getAnswerTwo(),
@@ -44,7 +45,8 @@ class QuizController extends Controller
                 }
                 $response['Quiz'][] = array(
                     'id' => $quiz->getId(),
-                    'name' => $quiz->getTitle(),
+                    'code' => $quiz->getCode(),
+                    'title' => $quiz->getTitle(),
                     'questions' => $questions,
                 );
             }
@@ -69,6 +71,7 @@ class QuizController extends Controller
             foreach ($quizs as $quiz) {
                 foreach ($quiz->getQuestions() as $question) {
                     $questions[] = array('id' => $question->getId(),
+                        'code' => $question->getCode(),
                         'title' => $question->getTitle(),
                         'answer_one' => $question->getAnswerOne(),
                         'answer_two' => $question->getAnswerTwo(),
@@ -81,7 +84,8 @@ class QuizController extends Controller
                 }
                 $response['quiz'][] = array(
                     'id' => $quiz->getId(),
-                    'name' => $quiz->getTitle(),
+                    'code' => $quiz->getCode(),
+                    'title' => $quiz->getTitle(),
                     'questions' => isset($questions) ? $questions : '',
                 );
             }
