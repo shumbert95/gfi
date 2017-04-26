@@ -9,6 +9,7 @@ sonata_admin:
                   - app.admin.offer
                   - app.admin.quiz
                   - app.admin.question
+                  - app.admin.tag
 #            cms:
 #                label: RH
 #                label_catalogue: admin
@@ -31,3 +32,8 @@ services:
                 arguments: [~, AppBundle\Entity\Offer, ~]
                 tags:
                     - { name: sonata.admin, manager_type: orm, label: Offres }
+    app.admin.tag:
+                class: AppBundle\Admin\TagAdmin
+                arguments: [~, AppBundle\Entity\Tags, ~]
+                tags:
+                    - { name: sonata.admin, manager_type: orm, label: Compétences }
