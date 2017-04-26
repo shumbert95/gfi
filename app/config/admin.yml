@@ -1,0 +1,27 @@
+sonata_admin:
+    title: Administration
+    dashboard:
+        groups:
+            content:
+              label: Recrutement
+              label_catalogue: admin
+              item:
+                  - app.admin.quiz
+                  - app.admin.question
+#            cms:
+#                label: RH
+#                label_catalogue: admin
+#                item:
+#                    - app.admin.candidats
+
+services:
+    app.admin.quiz:
+        class: AppBundle\Admin\QuizAdmin
+        arguments: [~, AppBundle\Entity\Quiz, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Questionnaire }
+    app.admin.question:
+                class: AppBundle\Admin\QuestionAdmin
+                arguments: [~, AppBundle\Entity\Question, ~]
+                tags:
+                    - { name: sonata.admin, manager_type: orm, label: Question }
