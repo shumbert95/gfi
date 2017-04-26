@@ -164,16 +164,16 @@ class UserController extends Controller
         $userManager = $this->get('fos_user.user_manager');
         $user = $userManager->findUserBy(array('email' => $content->email));
         if ($user) {
-            if (isset($content->first_name)) {
+            if (isset($content->first_name) && !empty($content->first_name)) {
                 $user->setFirstName($content->first_name);
             }
-            if (isset($content->last_name)) {
+            if (isset($content->last_name) && !empty($content->last_name)) {
                 $user->setLastName($content->last_name);
             }
-            if (isset($content->password)) {
+            if (isset($content->password) && !empty($content->password)) {
                 $user->setPlainPassword($content->password);
             }
-            if (isset($content->phone)) {
+            if (isset($content->phone) && !empty($content->phone)) {
                 $user->setPhone($content->phone);
             }
             $userManager->updateUser($user);
