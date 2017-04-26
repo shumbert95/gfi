@@ -6,6 +6,7 @@ sonata_admin:
               label: Recrutement
               label_catalogue: admin
               item:
+                  - app.admin.offer
                   - app.admin.quiz
                   - app.admin.question
 #            cms:
@@ -25,3 +26,8 @@ services:
                 arguments: [~, AppBundle\Entity\Question, ~]
                 tags:
                     - { name: sonata.admin, manager_type: orm, label: Question }
+    app.admin.offer:
+                class: AppBundle\Admin\OfferAdmin
+                arguments: [~, AppBundle\Entity\Offer, ~]
+                tags:
+                    - { name: sonata.admin, manager_type: orm, label: Offres }
