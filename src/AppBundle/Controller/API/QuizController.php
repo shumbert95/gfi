@@ -45,7 +45,6 @@ class QuizController extends Controller
                 $response['Quiz'][] = array(
                     'id' => $quiz->getId(),
                     'name' => $quiz->getTitle(),
-                    'poste' => $quiz->getPoste(),
                     'questions' => $questions,
                 );
             }
@@ -83,7 +82,6 @@ class QuizController extends Controller
                 $response['quiz'][] = array(
                     'id' => $quiz->getId(),
                     'name' => $quiz->getTitle(),
-                    'poste' => $quiz->getPoste(),
                     'questions' => isset($questions) ? $questions : '',
                 );
             }
