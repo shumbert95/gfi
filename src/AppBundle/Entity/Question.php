@@ -52,14 +52,14 @@ class Question
     /**
      * @var string
      *
-     * @ORM\Column(name="answer_three", type="text")
+     * @ORM\Column(name="answer_three", type="text", nullable=true)
      */
     private $answerThree;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="answer_four", type="text")
+     * @ORM\Column(name="answer_four", type="text", nullable=true)
      */
     private $answerFour;
 
