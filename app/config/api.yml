@@ -6,6 +6,10 @@ users:
     type:     rest
     resource: AppBundle\Controller\API\UserController
 
+tags:
+    type:     rest
+    resource: AppBundle\Controller\API\TagsController
+
 api:
     resource: AppBundle\Controller\API\DefaultController
     type: rest
