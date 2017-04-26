@@ -12,6 +12,7 @@ class QuizAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $formMapper->add('code', 'text', ['label' => 'Code', 'required' => true]);
         $formMapper->add('title', 'text', ['label' => 'Titre', 'required' => true]);
         $formMapper->add('questions', 'entity', ['required' => true,
             'label' => 'Questions',
@@ -22,12 +23,14 @@ class QuizAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper->add('id');
+        $datagridMapper->add('code');
         $datagridMapper->add('title');
     }
 
     public function configureListFields(ListMapper $list)
     {
         $list->addIdentifier('id', null, ['label' => 'Id']);
+        $list->addIdentifier('code', null, ['label' => 'Code']);
         $list->addIdentifier('title', null, ['label' => 'Nom']);
     }
 }
