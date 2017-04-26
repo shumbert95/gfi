@@ -280,5 +280,10 @@ class Question
         return $this->goodAnswer;
     }
 
+    public function __toString()
+    {
+        return $this->title;
+    }
+
 }
 

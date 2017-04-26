@@ -228,5 +228,10 @@ class Offer
     {
         return $this->optional_skills;
     }
+
+    public function __toString()
+    {
+        return $this->title;
+    }
 }
 

@@ -93,5 +93,10 @@ class Tags
     {
         return $this->custom;
     }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 }
 

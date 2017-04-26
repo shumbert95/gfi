@@ -29,13 +29,6 @@ class Quiz
     private $title;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="poste", type="string", length=255)
-     */
-    private $poste;
-
-    /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Question", cascade={"persist"})
      * @ORM\JoinTable(name="quiz_question",
      *      joinColumns={@ORM\JoinColumn(name="quiz_id", referencedColumnName="id")},
@@ -80,30 +73,6 @@ class Quiz
     }
 
     /**
-     * Set poste
-     *
-     * @param string $poste
-     *
-     * @return Quiz
-     */
-    public function setPoste($poste)
-    {
-        $this->poste = $poste;
-
-        return $this;
-    }
-
-    /**
-     * Get poste
-     *
-     * @return string
-     */
-    public function getPoste()
-    {
-        return $this->poste;
-    }
-
-    /**
      * Set questions
      *
      * @param ArrayCollection $questions
@@ -125,6 +94,11 @@ class Quiz
     public function getQuestions()
     {
         return $this->questions;
+    }
+
+    public function __toString()
+    {
+        return $this->title;
     }
 }
 
