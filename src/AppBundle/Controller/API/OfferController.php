@@ -28,12 +28,24 @@ class OfferController extends Controller
             ->getRepository('AppBundle:Offer')
             ->findOneByReference($request->get('reference'));
         if ($offer) {
+            $tags = array();
+            foreach ($offer->getRequiredSkills() as $tag) {
+                $tags['required_skills'] = array('id' => $tag->getId(),
+                    'name' => $tag->getName(),
+                );
+            }
+            foreach ($offer->getOptionalSkills() as $tag) {
+                $tags['optional_skills'] = array('id' => $tag->getId(),
+                    'name' => $tag->getName(),
+                );
+            }
             $response = array('success' => 'true', 'offer' => array(
                 'id' => $offer->getId(),
                 'reference' => $offer->getReference(),
                 'title' => $offer->getTitle(),
                 'description' => $offer->getDescription(),
                 'poste' => $offer->getPoste(),
+                'skills' => $tags,
             ));
 
         } else {
@@ -57,12 +69,24 @@ class OfferController extends Controller
             $response = array();
             $response['success'] = 'true';
             foreach ($offers as $k => $offer) {
+                $tags = array();
+                foreach ($offer->getRequiredSkills() as $tag) {
+                    $tags['required_skills'] = array('id' => $tag->getId(),
+                        'name' => $tag->getName(),
+                    );
+                }
+                foreach ($offer->getOptionalSkills() as $tag) {
+                    $tags['optional_skills'] = array('id' => $tag->getId(),
+                        'name' => $tag->getName(),
+                    );
+                }
                 $response['offers'][] = array(
                     'id' => $offer->getId(),
                     'reference' => $offer->getReference(),
                     'title' => $offer->getTitle(),
                     'description' => $offer->getDescription(),
                     'poste' => $offer->getPoste(),
+                    'skills' => $tags,
                 );
             }
         } else {
