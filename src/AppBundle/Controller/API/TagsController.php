@@ -33,6 +33,7 @@ class TagsController extends Controller
                 $response['tags'][] = array(
                     'id' => $tag->getId(),
                     'name' => $tag->getName(),
+                    'custom' => $tag->getCustom() ? 'true' : 'false',
                 );
             }
         } else {
