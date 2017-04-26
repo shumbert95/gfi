@@ -58,7 +58,7 @@ class QuizController extends Controller
     }
 
     /**
-     * @Get("/quiz/{offer_reference}")
+     * @Rest\Get("/quizs/{offer_reference}")
      */
     public function getQuizByOfferAction(Request $request)
     {

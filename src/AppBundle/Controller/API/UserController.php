@@ -33,7 +33,7 @@ class UserController extends Controller
             $tags = array();
             if (count($user->getSkills())) {
                 foreach ($user->getSkills() as $skill) {
-                    $tags[] = $skill->name;
+                    $tags[] = $skill->getName();
                 }
             }
             $response = array('success' => 'true', 'user' => array(
