@@ -5,12 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Questions
+ * Question
  *
- * @ORM\Table(name="questions")
+ * @ORM\Table(name="question")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\QuestionsRepository")
  */
-class Questions
+class Question
 {
     /**
      * @var int
@@ -55,6 +55,13 @@ class Questions
      * @ORM\Column(name="answer_four", type="text")
      */
     private $answerFour;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="good_answer", type="integer")
+     */
+    private $goodAnswer;
 
     /**
      * @var int
@@ -247,6 +254,30 @@ class Questions
     public function getPoints()
     {
         return $this->points;
+    }
+
+    /**
+     * Set goodAnswer
+     *
+     * @param integer $goodAnswer
+     *
+     * @return Question
+     */
+    public function setGoodAnswer($goodAnswer)
+    {
+        $this->goodAnswer = $goodAnswer;
+
+        return $this;
+    }
+
+    /**
+     * Get goodAnswer
+     *
+     * @return int
+     */
+    public function getGoodAnswer()
+    {
+        return $this->goodAnswer;
     }
 
 }

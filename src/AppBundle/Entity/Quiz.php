@@ -36,7 +36,7 @@ class Quiz
     private $poste;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Questions", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Question", cascade={"persist"})
      * @ORM\JoinTable(name="quiz_question",
      *      joinColumns={@ORM\JoinColumn(name="quiz_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="question_id", referencedColumnName="id")}
