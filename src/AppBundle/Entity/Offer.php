@@ -231,7 +231,7 @@ class Offer
 
     public function __toString()
     {
-        return $this->title;
+        return ''.$this->title;
     }
 }
 
