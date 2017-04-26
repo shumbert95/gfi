@@ -63,6 +63,13 @@ class Questions
      */
     private $time;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="points", type="integer")
+     */
+    private $points;
+
 
     /**
      * Get id
@@ -217,5 +224,30 @@ class Questions
     {
         return $this->time;
     }
+
+    /**
+     * Set points
+     *
+     * @param integer $points
+     *
+     * @return Questions
+     */
+    public function setPoints($points)
+    {
+        $this->points = $points;
+
+        return $this;
+    }
+
+    /**
+     * Get points
+     *
+     * @return int
+     */
+    public function getPoints()
+    {
+        return $this->points;
+    }
+
 }
 
