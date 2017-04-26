@@ -59,7 +59,12 @@ class DefaultController extends Controller
                                 ),
                                 'tags' => array(
                                     'get tags' => array('url' => '/api/tags',
-                                                        'method' => 'GET'))
+                                                        'method' => 'GET')),
+                                'quiz' => array(
+                                    'get quizs' => array('url' => '/api/quizs',
+                                                         'method' => 'GET'),
+                                    'get quizs by offer' => array('url' => '/api/quizs/{offer_reference}',
+                                                                  'method' => 'GET'))
                                 )));
         return new JsonResponse($response);
     }
