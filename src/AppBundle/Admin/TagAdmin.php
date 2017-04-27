@@ -13,6 +13,7 @@ class TagAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper->add('name', 'text', ['label' => 'Name', 'required' => true]);
+        $formMapper->add('custom', null, ['label' => 'Personnalisé', 'required' => true]);
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -25,5 +26,6 @@ class TagAdmin extends AbstractAdmin
     {
         $list->addIdentifier('id', null, ['label' => 'Id']);
         $list->addIdentifier('name', null, ['label' => 'Nom']);
+        $list->addIdentifier('custom', null, ['label' => 'Personnalisé', 'editable' => true]);
     }
 }

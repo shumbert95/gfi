@@ -31,7 +31,7 @@ class Tags
     /**
      * @var boolean
      *
-     * @ORM\Column(name="custom", type="string")
+     * @ORM\Column(name="custom", type="boolean")
      */
     private $custom;
 
