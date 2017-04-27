@@ -64,7 +64,13 @@ class DefaultController extends Controller
                                     'get quizs' => array('url' => '/api/quizs',
                                                          'method' => 'GET'),
                                     'get quizs by offer' => array('url' => '/api/quizs/{offer_reference}',
-                                                                  'method' => 'GET'))
+                                                                  'method' => 'GET')),
+                                'participation' => array(
+                                    'participate' => array('url' => '/api/participate',
+                                                           'method' => 'POST',
+                                                           'params' => array('email' => 'required (string)',
+                                                                             'offer_id' => 'required (int)',
+                                                                             'note' => 'required (int)')))
                                 )));
         return new JsonResponse($response);
     }
