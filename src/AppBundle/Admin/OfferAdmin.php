@@ -4,10 +4,12 @@ namespace AppBundle\Admin;
 
 use AppBundle\Entity\Quiz;
 use AppBundle\Entity\Tags;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class OfferAdmin extends AbstractAdmin
 {
@@ -16,7 +18,8 @@ class OfferAdmin extends AbstractAdmin
         $formMapper->add('reference', 'text', ['label' => 'Reference', 'required' => true]);
         $formMapper->add('title', 'text', ['label' => 'Titre', 'required' => true]);
         $formMapper->add('poste', 'text', ['label' => 'Poste', 'required' => true]);
-        $formMapper->add('description', 'text', ['label' => 'Description', 'required' => true]);
+        $formMapper->add('description', CKEditorType::class, ['label' => 'Description', 'required' => true]);
+        $formMapper->add('date', DateType::class, ['label' => 'Date', 'required' => true]);
         $formMapper->add('required_skills', 'entity', ['required' => true,
             'label' => 'Compétences requises',
             'multiple' => true,

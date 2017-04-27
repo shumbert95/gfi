@@ -3,6 +3,7 @@
 namespace AppBundle\Admin;
 
 use AppBundle\Entity\Question;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -13,7 +14,7 @@ class QuizAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper->add('code', 'text', ['label' => 'Code', 'required' => true]);
-        $formMapper->add('title', 'text', ['label' => 'Titre', 'required' => true]);
+        $formMapper->add('title', CKEditorType::class, ['label' => 'Titre', 'required' => false]);
         $formMapper->add('questions', 'entity', ['required' => true,
             'label' => 'Questions',
             'multiple' => true,
