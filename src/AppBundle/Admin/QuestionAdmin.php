@@ -13,12 +13,12 @@ class QuestionAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper->add('code', 'text', ['label' => 'Code', 'required' => true]);
-        $formMapper->add('title', CKEditorType::class, ['label' => 'Question', 'required' => true]);
-        $formMapper->add('answerOne', CKEditorType::class, ['label' => 'Réponse 1', 'required' => true]);
-        $formMapper->add('answerTwo', CKEditorType::class, ['label' => 'Réponse 2', 'required' => true]);
-        $formMapper->add('answerThree', CKEditorType::class, ['label' => 'Réponse 3', 'required' => false]);
-        $formMapper->add('answerFour', CKEditorType::class, ['label' => 'Réponse 4', 'required' => false]);
-        $formMapper->add('goodAnswer', CKEditorType::class, ['label' => 'Bonne réponse', 'required' => true]);
+        $formMapper->add('title', 'text', ['label' => 'Question', 'required' => true]);
+        $formMapper->add('answerOne','text', ['label' => 'Réponse 1', 'required' => true]);
+        $formMapper->add('answerTwo', 'text', ['label' => 'Réponse 2', 'required' => true]);
+        $formMapper->add('answerThree', 'text', ['label' => 'Réponse 3', 'required' => false]);
+        $formMapper->add('answerFour', 'text', ['label' => 'Réponse 4', 'required' => false]);
+        $formMapper->add('goodAnswer', 'text', ['label' => 'Bonne réponse', 'required' => true]);
         $formMapper->add('time', 'integer', ['label' => 'Temps autorisé (secondes)', 'required' => true]);
         $formMapper->add('points', 'integer', ['label' => 'Points', 'required' => true]);
     }

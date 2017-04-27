@@ -16,7 +16,7 @@ class QuizAdmin extends AbstractAdmin
     {
         $formMapper->add('code', 'text', ['label' => 'Code', 'required' => true]);
         $formMapper->add('tag', 'entity', ['label' => 'Compétence', 'required' => true, 'class' => Tags::class]);
-        $formMapper->add('title', CKEditorType::class, ['label' => 'Titre', 'required' => false]);
+        $formMapper->add('title', 'text', ['label' => 'Titre', 'required' => false]);
         $formMapper->add('questions', 'entity', ['required' => true,
             'label' => 'Questions',
             'multiple' => true,
