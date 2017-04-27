@@ -18,7 +18,7 @@ class QuestionAdmin extends AbstractAdmin
         $formMapper->add('answerTwo', CKEditorType::class, ['label' => 'Réponse 2', 'required' => true]);
         $formMapper->add('answerThree', CKEditorType::class, ['label' => 'Réponse 3', 'required' => false]);
         $formMapper->add('answerFour', CKEditorType::class, ['label' => 'Réponse 4', 'required' => false]);
-        $formMapper->add('goodAnswer', 'integer', ['label' => 'Bonne réponse', 'required' => true]);
+        $formMapper->add('goodAnswer', CKEditorType::class, ['label' => 'Bonne réponse', 'required' => true]);
         $formMapper->add('time', 'integer', ['label' => 'Temps autorisé (secondes)', 'required' => true]);
         $formMapper->add('points', 'integer', ['label' => 'Points', 'required' => true]);
     }
