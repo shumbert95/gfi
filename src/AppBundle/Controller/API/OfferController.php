@@ -48,6 +48,7 @@ class OfferController extends Controller
                     'title' => $offer->getTitle(),
                     'description' => $offer->getDescription(),
                     'poste' => $offer->getPoste(),
+                    'date' => $offer->getDate(),
                     'skills' => $tags,
                 );
             }
@@ -86,6 +87,7 @@ class OfferController extends Controller
                 'title' => $offer->getTitle(),
                 'description' => $offer->getDescription(),
                 'poste' => $offer->getPoste(),
+                'date' => $offer->getDate(),
                 'skills' => $tags,
             ));
 
