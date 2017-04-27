@@ -64,9 +64,9 @@ class Question
     private $answerFour;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="good_answer", type="integer")
+     * @ORM\Column(name="good_answer", type="string")
      */
     private $goodAnswer;
 
