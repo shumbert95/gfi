@@ -28,17 +28,17 @@ class ParticipationController extends Controller
 
         $userManager = $this->get('fos_user.user_manager');
         $user = $userManager->findUserBy(array('email' => $content->email));
-        $offer = $this->getDoctrine()->getRepository('AppBundle:Offer')->find($content->offer_id);
+        $quiz = $this->getDoctrine()->getRepository('AppBundle:Quiz')->find($content->quiz_id);
         if (!$user) {
             $response = array('success' => 'false', 'message' => 'No account found for this email.');
-        } elseif (!$offer) {
-            $response = array('success' => 'false', 'message' => 'No offer found.');
+        } elseif (!$quiz) {
+            $response = array('success' => 'false', 'message' => 'No quiz found.');
         } else {
             $em = $this->getDoctrine()->getManager();
             $participation = new Participation();
             $participation->setDate(new \DateTime());
             $participation->setNote($content->note);
-            $participation->setOffer($offer);
+            $participation->setQuiz($quiz);
             $participation->setUser($user);
             $em->persist($participation);
             $em->flush();

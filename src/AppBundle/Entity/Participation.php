@@ -37,9 +37,9 @@ class Participation
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="Offer", inversedBy="participations", cascade={"merge", "persist"})
+     * @ORM\ManyToOne(targetEntity="Quiz", inversedBy="participations", cascade={"merge", "persist"})
      */
-    private $offer;
+    private $quiz;
 
     /**
      *
@@ -107,27 +107,27 @@ class Participation
     }
 
     /**
-     * Set offer
+     * Set quiz
      *
-     * @param Offer $offer
+     * @param Quiz $quiz
      *
      * @return Participation
      */
-    public function setOffer($offer)
+    public function setQuiz($quiz)
     {
-        $this->offer = $offer;
+        $this->quiz = $quiz;
 
         return $this;
     }
 
     /**
-     * Get offer
+     * Get quiz
      *
      * @return Participation
      */
-    public function getOffer()
+    public function getQuiz()
     {
-        return $this->offer;
+        return $this->quiz;
     }
 
     /**
@@ -157,8 +157,8 @@ class Participation
     public function getInfosAsArray()
     {
         return array('id' => $this->id,
-            'offer_id' => $this->offer->getId(),
-            'offer_title' => $this->offer->getTitle(),
+            'quiz_id' => $this->quiz->getId(),
+            'quiz_title' => $this->quiz->getTitle(),
             'note' => $this->note,
             'date' => $this->date,
             'user_id' => $this->user->getId());
