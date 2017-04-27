@@ -77,6 +77,13 @@ class Offer
      */
     private $quizs;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetime")
+     */
+    private $date;
+
 
     public function __construct()
     {
@@ -261,6 +268,30 @@ class Offer
     public function getQuizs()
     {
         return $this->quizs;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return Offer
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
     }
 
     public function __toString()
