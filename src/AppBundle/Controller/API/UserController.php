@@ -42,6 +42,9 @@ class UserController extends Controller
                                                             'last_name' => $user->getLastName(),
                                                             'email' => $user->getEmail(),
                                                             'phone' => $user->getPhone(),
+                                                            'poste' => $user->getPoste(),
+                                                            'title' => $user->getTitle(),
+                                                            'description' => $user->getDescription(),
                                                             'tags' => $tags
                                                             )
             );
@@ -115,6 +118,9 @@ class UserController extends Controller
                     'last_name' => $user->getLastName(),
                     'email' => $user->getEmail(),
                     'phone' => $user->getPhone(),
+                    'poste' => $user->getPoste(),
+                    'title' => $user->getTitle(),
+                    'description' => $user->getDescription(),
                     'tags' => $tags
                 )
                 );
@@ -189,6 +195,15 @@ class UserController extends Controller
             }
             if (isset($content->phone) && !empty($content->phone)) {
                 $user->setPhone($content->phone);
+            }
+            if (isset($content->poste) && !empty($content->poste)) {
+                $user->setPoste($content->poste);
+            }
+            if (isset($content->title) && !empty($content->title)) {
+                $user->setPoste($content->title);
+            }
+            if (isset($content->description) && !empty($content->description)) {
+                $user->setPoste($content->description);
             }
             $userManager->updateUser($user);
             $response = array('success' => 'true', 'message' => 'Users infos updated.', 'user_id' => $user->getId());

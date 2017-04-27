@@ -41,6 +41,27 @@ class User extends BaseUser
     private $phone;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="poste", type="string")
+     */
+    private $poste;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string")
+     */
+    private $title;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text")
+     */
+    private $description;
+
+    /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tags", cascade={"persist"})
      * @ORM\JoinTable(name="user_skills",
      *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
@@ -172,5 +193,77 @@ class User extends BaseUser
     public function removeActivity(\AppBundle\Entity\Tags $skill)
     {
         $this->skills->removeElement($skill);
+    }
+
+    /**
+     * Set poste
+     *
+     * @param string $poste
+     *
+     * @return User
+     */
+    public function setPoste($poste)
+    {
+        $this->poste = $poste;
+
+        return $this;
+    }
+
+    /**
+     * Get poste
+     *
+     * @return string
+     */
+    public function getPoste()
+    {
+        return $this->poste;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     *
+     * @return User
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return User
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }
