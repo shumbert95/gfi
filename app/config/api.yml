@@ -14,6 +14,10 @@ quiz:
     type:     rest
     resource: AppBundle\Controller\API\QuizController
 
+participation:
+    type:     rest
+    resource: AppBundle\Controller\API\ParticipationController
+
 api:
     resource: AppBundle\Controller\API\DefaultController
     type: rest
