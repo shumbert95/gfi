@@ -3,6 +3,7 @@
 namespace AppBundle\Admin;
 
 use AppBundle\Entity\Question;
+use AppBundle\Entity\Tags;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -14,6 +15,7 @@ class QuizAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper->add('code', 'text', ['label' => 'Code', 'required' => true]);
+        $formMapper->add('tag', 'entity', ['label' => 'Compétence', 'required' => true, 'class' => Tags::class]);
         $formMapper->add('title', CKEditorType::class, ['label' => 'Titre', 'required' => false]);
         $formMapper->add('questions', 'entity', ['required' => true,
             'label' => 'Questions',
@@ -26,6 +28,7 @@ class QuizAdmin extends AbstractAdmin
         $datagridMapper->add('id');
         $datagridMapper->add('code');
         $datagridMapper->add('title');
+        $datagridMapper->add('tag');
     }
 
     public function configureListFields(ListMapper $list)
@@ -33,5 +36,6 @@ class QuizAdmin extends AbstractAdmin
         $list->addIdentifier('id', null, ['label' => 'Id']);
         $list->addIdentifier('code', null, ['label' => 'Code']);
         $list->addIdentifier('title', null, ['label' => 'Nom']);
+        $list->addIdentifier('tag', null, ['label' => 'Compétence']);
     }
 }

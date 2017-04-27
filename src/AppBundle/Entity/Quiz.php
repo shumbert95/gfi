@@ -3,7 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use AppBundle\Entity\Tags;
 /**
  * Quiz
  *
@@ -27,6 +27,12 @@ class Quiz
      * @ORM\Column(name="code", type="string", length=64, unique=true)
      */
     private $code;
+
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="Tags", inversedBy="quizs", cascade={"merge", "persist"})
+     */
+    private $tag;
 
     /**
      * @var string
@@ -104,6 +110,30 @@ class Quiz
     }
 
     /**
+     * Set tag
+     *
+     * @param Tags $tag
+     *
+     * @return Quiz
+     */
+    public function setTag($tag)
+    {
+        $this->tag = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Get tag
+     *
+     * @return Tags
+     */
+    public function getTag()
+    {
+        return $this->tag;
+    }
+
+    /**
      * Set questions
      *
      * @param ArrayCollection $questions
@@ -140,6 +170,8 @@ class Quiz
         return array(
             'id' => $this->id,
             'code' => $this->code,
+            'tag_id' => $this->tag->getId(),
+            'tag_name' => $this->tag->getName(),
             'title' => $this->title,
             'questions' => $questions ? : '',
         );
