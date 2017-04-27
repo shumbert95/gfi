@@ -69,15 +69,6 @@ class Offer
     private $optional_skills;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Quiz", cascade={"persist"})
-     * @ORM\JoinTable(name="offer_quiz",
-     *      joinColumns={@ORM\JoinColumn(name="offer_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="quiz_id", referencedColumnName="id")}
-     * )
-     */
-    private $quizs;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetime")
@@ -244,30 +235,6 @@ class Offer
     public function getOptionalSkills()
     {
         return $this->optional_skills;
-    }
-
-    /**
-     * Set quizs
-     *
-     * @param string $quizs
-     *
-     * @return Offer
-     */
-    public function setQuizs($quizs)
-    {
-        $this->quizs = $quizs;
-
-        return $this;
-    }
-
-    /**
-     * Get quizs
-     *
-     * @return ArrayCollection
-     */
-    public function getQuizs()
-    {
-        return $this->quizs;
     }
 
     /**

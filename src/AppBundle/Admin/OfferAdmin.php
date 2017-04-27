@@ -28,10 +28,6 @@ class OfferAdmin extends AbstractAdmin
             'label' => 'Compétences optionnelles',
             'multiple' => true,
             'class' => Tags::class]);
-        $formMapper->add('quizs', 'entity', ['required' => false,
-            'label' => 'Questionnaires',
-            'multiple' => true,
-            'class' => Quiz::class]);
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
