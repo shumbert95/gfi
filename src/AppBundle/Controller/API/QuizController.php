@@ -48,10 +48,20 @@ class QuizController extends Controller
             ->getRepository('AppBundle:Offer')
             ->findOneByReference($request->get('offer_reference'));
         if ($offer) {
-            $quizs = $offer->getQuizs();
+            foreach ($offer->getRequiredSkills() as $tag) {
+                $q = $this->getDoctrine()->getRepository('AppBundle:Quiz')->findBy(array('tag' => $tag));
+                if (count($q)) {
+                    foreach ($q as $_quiz) {
+                        $quizs[$tag->getName()][] = $_quiz;
+                    }
+                }
+
+            }
             $response['success'] = 'true';
-            foreach ($quizs as $quiz) {
-                $response['quiz'][] = $quiz->getInfosAsArray();
+            foreach ($quizs as $tag => $_quizs) {
+                foreach($_quizs as $quiz) {
+                    $response['quiz'][] = $quiz->getInfosAsArray();
+                }
             }
 
         } else {
