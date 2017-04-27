@@ -30,25 +30,7 @@ class QuizController extends Controller
             $response = array();
             $response['success'] = 'true';
             foreach ($quizs as $quiz) {
-                foreach ($quiz->getQuestions() as $question) {
-                    $questions[] = array('id' => $question->getId(),
-                                         'code' => $question->getCode(),
-                                         'title' => $question->getTitle(),
-                                         'answer_one' => $question->getAnswerOne(),
-                                         'answer_two' => $question->getAnswerTwo(),
-                                         'answer_three' => $question->getAnswerThree(),
-                                         'answer_four' => $question->getAnswerFour(),
-                                         'good_answer' => $question->getGoodAnswer(),
-                                         'points' => $question->getPoints(),
-                                         'time' => $question->getTime(),
-                                        );
-                }
-                $response['quiz'][] = array(
-                    'id' => $quiz->getId(),
-                    'code' => $quiz->getCode(),
-                    'title' => $quiz->getTitle(),
-                    'questions' => $questions,
-                );
+                $response['quiz'][] = $quiz->getInfosAsArray();
             }
         } else {
             $response = array('success' => 'false', 'message' => 'No quiz found.');
@@ -69,25 +51,7 @@ class QuizController extends Controller
             $quizs = $offer->getQuizs();
             $response['success'] = 'true';
             foreach ($quizs as $quiz) {
-                foreach ($quiz->getQuestions() as $question) {
-                    $questions[] = array('id' => $question->getId(),
-                        'code' => $question->getCode(),
-                        'title' => $question->getTitle(),
-                        'answer_one' => $question->getAnswerOne(),
-                        'answer_two' => $question->getAnswerTwo(),
-                        'answer_three' => $question->getAnswerThree(),
-                        'answer_four' => $question->getAnswerFour(),
-                        'good_answer' => $question->getGoodAnswer(),
-                        'points' => $question->getPoints(),
-                        'time' => $question->getTime(),
-                    );
-                }
-                $response['quiz'][] = array(
-                    'id' => $quiz->getId(),
-                    'code' => $quiz->getCode(),
-                    'title' => $quiz->getTitle(),
-                    'questions' => isset($questions) ? $questions : '',
-                );
+                $response['quiz'][] = $quiz->getInfosAsArray();
             }
 
         } else {

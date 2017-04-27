@@ -131,5 +131,18 @@ class Quiz
     {
         return ''.$this->code;
     }
+
+    public function getInfosAsArray()
+    {
+        foreach ($this->questions as $question) {
+            $questions[] = $question->getInfosAsArray();
+        }
+        return array(
+            'id' => $this->id,
+            'code' => $this->code,
+            'title' => $this->title,
+            'questions' => $questions ? : '',
+        );
+    }
 }
 

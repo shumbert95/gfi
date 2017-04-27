@@ -30,11 +30,7 @@ class TagsController extends Controller
             $response = array();
             $response['success'] = 'true';
             foreach ($tags as $tag) {
-                $response['tags'][] = array(
-                    'id' => $tag->getId(),
-                    'name' => $tag->getName(),
-                    'custom' => $tag->getCustom() ? 'true' : 'false',
-                );
+                $response['tags'][] = $tag->getInfosAsArray();
             }
         } else {
             $response = array('success' => 'false', 'message' => 'No tags found.');

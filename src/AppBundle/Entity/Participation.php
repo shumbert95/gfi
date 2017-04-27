@@ -153,5 +153,15 @@ class Participation
     {
         return $this->user;
     }
+
+    public function getInfosAsArray()
+    {
+        return array('id' => $this->id,
+            'offer_id' => $this->offer->getId(),
+            'offer_title' => $this->offer->getTitle(),
+            'note' => $this->note,
+            'date' => $this->date,
+            'user_id' => $this->user->getId());
+    }
 }
 

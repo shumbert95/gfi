@@ -30,24 +30,7 @@ class UserController extends Controller
         $user = $userManager->findUserBy(array('email' => $request->get('username')));
 
         if ($user) {
-            $tags = array();
-            if (count($user->getSkills())) {
-                foreach ($user->getSkills() as $skill) {
-                    $tags[] = $skill->getName();
-                }
-            }
-            $response = array('success' => 'true', 'user' => array(
-                                                            'id' => $user->getId(),
-                                                            'first_name' => $user->getFirstName(),
-                                                            'last_name' => $user->getLastName(),
-                                                            'email' => $user->getEmail(),
-                                                            'phone' => $user->getPhone(),
-                                                            'poste' => $user->getPoste(),
-                                                            'title' => $user->getTitle(),
-                                                            'description' => $user->getDescription(),
-                                                            'tags' => $tags
-                                                            )
-            );
+            $response = array('success' => 'true', 'user' => $user->getInfosAsArray());
         } else {
             $response = array('success' => 'false', 'message' => 'No user found');
         }
@@ -81,7 +64,7 @@ class UserController extends Controller
             $token = $tokenGenerator->generateToken();
             $user->setConfirmationToken($token);
             $userManager->updateUser($user);
-            $response = array('success' => 'true', 'message' => 'User created', 'user_id' => $user->getId());
+            $response = array('success' => 'true', 'message' => 'User created', 'user' => $user->getInfosAsArray());
         }
 
         return new JsonResponse($response);
@@ -112,18 +95,7 @@ class UserController extends Controller
                         $tags[] = $skill->getName();
                     }
                 }
-                $response = array('success' => 'true', 'message' => 'Connected', 'user' => array(
-                    'id' => $user->getId(),
-                    'first_name' => $user->getFirstName(),
-                    'last_name' => $user->getLastName(),
-                    'email' => $user->getEmail(),
-                    'phone' => $user->getPhone(),
-                    'poste' => $user->getPoste(),
-                    'title' => $user->getTitle(),
-                    'description' => $user->getDescription(),
-                    'tags' => $tags
-                )
-                );
+                $response = array('success' => 'true', 'message' => 'Connected', 'user' => $user->getInfosAsArray());
             } else {
                 $response = array('success' => 'false', 'message' => 'Wrong password');
             }
@@ -165,7 +137,7 @@ class UserController extends Controller
             }
             $user->setSkills($tags);
             $userManager->updateUser($user);
-            $response = array('success' => 'true', 'message' => 'User updated', 'user_id' => $user->getId());
+            $response = array('success' => 'true', 'message' => 'User updated', 'user' => $user->getInfosAsArray());
         } else {
             $response = array('success' => 'false', 'message' => 'No account found for this combination email/password');
         }
@@ -206,7 +178,7 @@ class UserController extends Controller
                 $user->setPoste($content->description);
             }
             $userManager->updateUser($user);
-            $response = array('success' => 'true', 'message' => 'Users infos updated.', 'user_id' => $user->getId());
+            $response = array('success' => 'true', 'message' => 'Users infos updated.', 'user' => $user->getInfosAsArray());
         } else {
             $response = array('success' => 'false', 'message' => 'No account found for this email.');
         }
@@ -230,12 +202,7 @@ class UserController extends Controller
             if (count($participations)) {
                 foreach ($participations as $participation) {
                     if ($participation->getId()) {
-                        $_participations[] = array('participation_id' => $participation->getId(),
-                            'offer_id' => $participation->getOffer()->getId(),
-                            'offer_title' => $participation->getOffer()->getTitle(),
-                            'note' => $participation->getNote(),
-                            'date' => $participation->getDate()
-                        );
+                        $_participations[] = $participation->getInfosAsArray();
                     }
                 }
                 $response = array('success' => 'true', 'participations' => $_participations);

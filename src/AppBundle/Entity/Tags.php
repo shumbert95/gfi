@@ -98,5 +98,12 @@ class Tags
     {
         return ''.$this->name;
     }
+
+    public function getInfosAsArray()
+    {
+        return array('id' => $this->id,
+            'name' => $this->name,
+        );
+    }
 }
 

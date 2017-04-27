@@ -315,5 +315,20 @@ class Question
         return ''.$this->code;
     }
 
+    public function getInfosAsArray()
+    {
+        return array('id' => $this->id,
+            'code' => $this->code,
+            'title' => $this->title,
+            'answer_one' => $this->answerOne,
+            'answer_two' => $this->answerTwo,
+            'answer_three' => $this->answerThree,
+            'answer_four' => $this->answerFour,
+            'good_answer' => $this->goodAnswer,
+            'points' => $this->points,
+            'time' => $this->time,
+        );
+    }
+
 }
 

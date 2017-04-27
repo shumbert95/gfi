@@ -42,13 +42,7 @@ class ParticipationController extends Controller
             $participation->setUser($user);
             $em->persist($participation);
             $em->flush();
-            $_participation = array('id' => $participation->getId(),
-                                    'offer_id' => $participation->getOffer()->getId(),
-                                    'offer_title' => $participation->getOffer()->getTitle(),
-                                    'note' => $participation->getNote(),
-                                    'date' => $participation->getDate(),
-                                    'user_id' => $participation->getUser()->getId());
-            $response = array('success' => 'true', 'message' => 'Participation saved.', 'participation' => $_participation);
+            $response = array('success' => 'true', 'message' => 'Participation saved.', 'participation' => $participation->getInfosAsArray());
         }
 
         return new JsonResponse($response);

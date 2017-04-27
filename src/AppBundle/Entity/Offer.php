@@ -298,5 +298,25 @@ class Offer
     {
         return ''.$this->title;
     }
+
+    public function getInfosAsArray()
+    {
+        $tags = array();
+        foreach ($this->required_skills as $tag) {
+            $tags['required_skills'] = $tag->getInfosAsArray();
+        }
+        foreach ($this->optional_skills as $tag) {
+            $tags['optional_skills'] = $tag->getInfosAsArray();
+        }
+        return array(
+            'id' => $this->id,
+            'reference' => $this->reference,
+            'title' => $this->title,
+            'description' => $this->description,
+            'poste' => $this->poste,
+            'date' => $this->date,
+            'skills' => $tags,
+        );
+    }
 }
 
