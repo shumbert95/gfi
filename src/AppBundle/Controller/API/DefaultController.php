@@ -73,7 +73,7 @@ class DefaultController extends Controller
                                     'participate' => array('url' => '/api/participate',
                                                            'method' => 'POST',
                                                            'params' => array('email' => 'required (string)',
-                                                                             'offer_id' => 'required (int)',
+                                                                             'quiz_id' => 'required (int)',
                                                                              'note' => 'required (int)')))
                                 )));
         return new JsonResponse($response);
