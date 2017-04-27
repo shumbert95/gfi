@@ -50,7 +50,11 @@ class DefaultController extends Controller
                                                                               'first_name' => 'optional (string)',
                                                                               'last_name' => 'optional (string)',
                                                                               'password' => 'optional (string)',
-                                                                              'phone' => 'optional (string)')),
+                                                                              'phone' => 'optional (string)',
+                                                                              'poste' => 'optional (string)',
+                                                                              'title' => 'optional (string)',
+                                                                              'description' => 'optional (string)',
+                                                                )),
                                 'offers' => array(
                                     'get offers' => array('url' => '/api/offers',
                                                           'method' => 'GET'),
