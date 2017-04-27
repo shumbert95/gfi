@@ -103,7 +103,21 @@ class UserController extends Controller
             $bool = ($encoder->isPasswordValid($user->getPassword(), $content->password, $user->getSalt())) ? true : false;
 
             if ($bool) {
-                $response = array('success' => 'true', 'message' => 'Connected', 'user_id' => $user->getId());
+                $tags = array();
+                if (count($user->getSkills())) {
+                    foreach ($user->getSkills() as $skill) {
+                        $tags[] = $skill->getName();
+                    }
+                }
+                $response = array('success' => 'true', 'message' => 'Connected', 'user' => array(
+                    'id' => $user->getId(),
+                    'first_name' => $user->getFirstName(),
+                    'last_name' => $user->getLastName(),
+                    'email' => $user->getEmail(),
+                    'phone' => $user->getPhone(),
+                    'tags' => $tags
+                )
+                );
             } else {
                 $response = array('success' => 'false', 'message' => 'Wrong password');
             }
@@ -184,4 +198,41 @@ class UserController extends Controller
 
         return new JsonResponse($response);
     }
+
+    /**
+     *
+     * @param Request $request
+     * @Rest\Get("/user/participations")
+     */
+//    public function getUserParticipationsAction(Request $request)
+//    {
+//
+//        $userManager = $this->get('fos_user.user_manager');
+//        $user = $userManager->findUserBy(array('email' => $request->get('username')));
+//
+//        if ($user) {
+//            $participations = $this->getDoctrine()->getRepository('AppBundle:Participation')->getByUser($user);
+//            $response = array('test');
+//
+//            if (count($participations)) {
+//                foreach ($participations as $participation) {
+//                    $participations[] = array('participation_id' => $participation['participation_id'],
+//                                              'offer_id' => $participation['offer_id'],
+//                                              'offer_title' => $participation['offer_title'],
+//                                              'note' => $participation['note'],
+//                                              'date' => $participation['date']
+//                        );
+//                }
+//                $response = array('success' => 'true', 'participations' => $participations);
+//            } else {
+//                $response = array('success' => 'true', 'Message' => 'No participation found.');
+//            }
+//        } else {
+//            $response = array('success' => 'false', 'message' => 'No user found');
+//        }
+//
+//        return new JsonResponse($response);
+//
+//    }
+
 }
