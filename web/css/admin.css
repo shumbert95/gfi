@@ -66,4 +66,5 @@
 }
 .skin-black .content-wrapper {
     background-image: url('../images/background.jpg');
+    background-position: center;
 }
