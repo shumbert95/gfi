@@ -43,21 +43,21 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="poste", type="string")
+     * @ORM\Column(name="poste", type="string", nullable=true)
      */
     private $poste;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string")
+     * @ORM\Column(name="title", type="string", nullable=true)
      */
     private $title;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
