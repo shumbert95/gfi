@@ -43,6 +43,7 @@
     border:1px solid #435159;
 }
 .skin-black .sidebar-menu>li.active>a {
+    color: #435159;
     background-color: white;
 }
 
@@ -57,10 +58,7 @@
 .skin-black .sidebar p {
     border: none !important;
 }
-.skin-black .treeview-menu>li>a {
-    color: #435159;
-}
-.skin-black .treeview-menu>li:hover>a {
+.skin-black .treeview-menu>li:hover>a, .skin-black .treeview-menu>li.active>a, .skin-black .treeview-menu>li>a:hover, .skin-black .treeview-menu>li>a {
     color: #435159;
 }
 .skin-black .sidebar-menu>li>.treeview-menu {
