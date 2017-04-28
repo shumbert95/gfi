@@ -55,6 +55,8 @@ class DefaultController extends Controller
                                                                               'title' => 'optional (string)',
                                                                               'description' => 'optional (string)',
                                                                 )),
+                                    'get participations' => array('url' => '/api/user/participations?username={email}',
+                                                                  'method' => 'GET')),
                                 'offers' => array(
                                     'get offers' => array('url' => '/api/offers',
                                                           'method' => 'GET'),
@@ -75,7 +77,7 @@ class DefaultController extends Controller
                                                            'params' => array('email' => 'required (string)',
                                                                              'quiz_id' => 'required (int)',
                                                                              'note' => 'required (int)')))
-                                )));
+                                ));
         return new JsonResponse($response);
     }
 }
