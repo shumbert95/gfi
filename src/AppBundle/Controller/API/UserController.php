@@ -172,10 +172,10 @@ class UserController extends Controller
                 $user->setPoste($content->poste);
             }
             if (isset($content->title) && !empty($content->title)) {
-                $user->setPoste($content->title);
+                $user->setTitle($content->title);
             }
             if (isset($content->description) && !empty($content->description)) {
-                $user->setPoste($content->description);
+                $user->setDescription($content->description);
             }
             $userManager->updateUser($user);
             $response = array('success' => 'true', 'message' => 'Users infos updated.', 'user' => $user->getInfosAsArray());
